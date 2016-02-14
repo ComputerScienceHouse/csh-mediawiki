@@ -1,16 +1,12 @@
-# Bootstrap Mediawiki
+# CSH Mediawiki
 
-This is a MediaWiki skin that uses Bootstrap 3 from Twitter!  The framework gives a boatload of features that play really nicely with a MediaWiki installation.  To get up and rolling, there's a few things that should be done.
-
-If you'd like to see one of these in the wild, check out the [EotL Wiki](http://eotl.borkweb.com).
-
-![Screenshot](https://raw.githubusercontent.com/borkweb/bootstrap-mediawiki/master/images/bootstrap-mediawiki-screenshot.png)
+This is a MediaWiki skin that uses Bootstrap 3, customized for Computer Science House. The framework gives a boatload of features that play really nicely with a MediaWiki installation.  To get up and rolling, there's a few things that should be done.
 
 ## Installation
 First, clone the repository into your `skins/` directory.
 
 ```
-git clone https://github.com/borkweb/bootstrap-mediawiki.git
+git clone https://github.com/stevenmirabito/csh-mediawiki.git
 ```
 
 Next, in `LocalSettings.php` set:
@@ -22,7 +18,7 @@ $wgDefaultSkin = 'bootstrapmediawiki';
 Then add at the bottom:
 
 ```php
-require_once( "$IP/skins/bootstrap-mediawiki/bootstrap-mediawiki.php" );
+require_once("$IP/skins/csh-mediawiki/bootstrap-mediawiki.php");
 ```
 
 ## Setup
