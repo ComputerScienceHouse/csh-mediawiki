@@ -1,8 +1,5 @@
 body {
-	background-color: #fff;
-	background-image: url(images/wiki-bg.jpg);
-	background-repeat: repeat-x;
-	background-position: center 80px;
+	background: #fafafa;
 	color: #222;
 	padding-top: 128px;
 }
@@ -41,9 +38,20 @@ p {
 	margin-bottom: 9px;;
 }
 
-.navbar-brand img {
-	margin-right: 0.5em;
-	max-height: 30px;
+.navbar-brand .logo {
+    width: 24px;
+    height: 23px;
+    position: relative;
+    top: -2px;
+    display: inline;
+    margin-right: 2px;
+}
+
+.user-icon > img {
+    width: 24px;
+    height: 24px;
+    border-radius: 2px;
+    margin-right: 8px;
 }
 
 .navbar input {
@@ -109,21 +117,6 @@ option.unclickable {
 
 #subnav-select {
 	display: none;
-}
-
-.nav .user-icon {
-	border: 1px solid rgba( 55, 55, 55, 0.1 );
-	display: inline-block;
-	margin-right: 0.5em;
-	vertical-align: middle;
-	width: 20px;
-	height: 20px;
-}
-
-.nav .user-icon img {
-	border: 1px solid rgba( 0, 0, 0, 0.5 );
-	width: 20px;
-	height: 20px;
 }
 
 #wiki-body h2 {
@@ -327,6 +320,25 @@ img.thumbborder {
 	background-color: #f5f5f5;
 	border-color: #ccc;
 	color: #333;
+}
+
+.navbar-collapse .dropdown-menu {
+    margin-top: 4px !important;
+}
+
+.navbar-collapse > ul:nth-child(3) .dropdown-menu {
+    margin-top: 0px !important;
+}
+
+.navbar-search #searchInput {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+@media (min-width: 768px) {
+    .navbar-form.navbar-right:last-child {
+        margin-right: 0;
+    }
 }
 
 /* Subnav */

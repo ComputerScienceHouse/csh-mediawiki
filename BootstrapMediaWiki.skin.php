@@ -52,7 +52,7 @@ class SkinBootstrapMediaWiki extends SkinTemplate {
 		$out->addModuleStyles( 'skins.bootstrapmediawiki' );
 
 		// we need to include this here so the file pathing is right
-		$out->addStyle( 'bootstrap-mediawiki/font-awesome/css/font-awesome.min.css' );
+        $out->addStyle( 'csh-mediawiki/font-awesome/css/font-awesome.min.css' );
 	}//end setupSkinUserCss
 }
 
@@ -91,7 +91,7 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 
 		$this->html('headelement');
 		?>
-		<div class="navbar navbar-default navbar-fixed-top <?php echo $wgNavBarClasses; ?>" role="navigation">
+		<div class="navbar navbar-inverse navbar-fixed-top <?php echo $wgNavBarClasses; ?>" role="navigation">
 				<div class="container">
 					<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 					<div class="navbar-header">
@@ -101,16 +101,16 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="<?php echo $this->data['nav_urls']['mainpage']['href'] ?>" title="<?php echo $wgSitename ?>"><?php echo isset( $wgLogo ) && $wgLogo ? "<img src='{$wgLogo}' alt='Logo'/> " : ''; echo $wgSitenameshort ?: $wgSitename; ?></a>
+                        <a class="navbar-brand" href="<?php echo $this->data['nav_urls']['mainpage']['href'] ?>" title="<?php echo $wgSitename ?>"><?php echo isset( $wgLogo ) && $wgLogo ? "<img src='{$wgLogo}' alt='Logo' class='logo' /> " : ''; ?><span><?php echo $wgSitenameshort ?: $wgSitename; ?></span></a>
 					</div>
 
 					<div class="collapse navbar-collapse">
 						<ul class="nav navbar-nav">
 							<li>
-							<a href="<?php echo $this->data['nav_urls']['mainpage']['href'] ?>">Home</a>
+							<a href="<?php echo $this->data['nav_urls']['mainpage']['href'] ?>"><i class="fa fa-home"></i> Home</a>
 							</li>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <span class="caret"></span></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> Tools <span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="<?php echo $url_prefix; ?>Special:RecentChanges" class="recent-changes"><i class="fa fa-edit"></i> Recent Changes</a></li>
 									<li><a href="<?php echo $url_prefix; ?>Special:SpecialPages" class="special-pages"><i class="fa fa-star-o"></i> Special Pages</a></li>
@@ -123,21 +123,20 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 						</ul>
 					<?php
 					if ( $wgUser->isLoggedIn() ) {
+						if ( count( $this->data['content_actions']) > 0 ) {
+							$content_nav = $this->get_array_links( $this->data['content_actions'], '<i class="fa fa-file-text"></i> Page', 'page' );
+							?>
+							<ul class="nav navbar-nav navbar-right content-actions"><?php echo $content_nav; ?></ul>
+							<?php
+						}//end if
 						if ( count( $this->data['personal_urls'] ) > 0 ) {
-							$user_icon = '<span class="user-icon"><img src="https://secure.gravatar.com/avatar/'.md5(strtolower( $wgUser->getEmail())).'.jpg?s=20&r=g"/></span>';
+							$user_icon = '<span class="user-icon"><img src="https://profiles.csh.rit.edu/image/'.strtolower($wgUser->getName()).'"/></span>';
 							$name = strtolower( $wgUser->getName() );
 							$user_nav = $this->get_array_links( $this->data['personal_urls'], $user_icon . $name, 'user' );
 							?>
 							<ul<?php $this->html('userlangattributes') ?> class="nav navbar-nav navbar-right">
 								<?php echo $user_nav; ?>
 							</ul>
-							<?php
-						}//end if
-
-						if ( count( $this->data['content_actions']) > 0 ) {
-							$content_nav = $this->get_array_links( $this->data['content_actions'], 'Page', 'page' );
-							?>
-							<ul class="nav navbar-nav navbar-right content-actions"><?php echo $content_nav; ?></ul>
 							<?php
 						}//end if
 					} else {  // else if is logged in
@@ -150,10 +149,13 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 						<?php
 					}
 					?>
-					<form class="navbar-search navbar-form navbar-right" action="<?php $this->text( 'wgScript' ) ?>" id="searchform" role="search">
-						<div>
-							<input class="form-control" type="search" name="search" placeholder="Search" title="Search <?php echo $wgSitename; ?> [ctrl-option-f]" accesskey="f" id="searchInput" autocomplete="off">
-							<input type="hidden" name="title" value="Special:Search">
+					<form class="navbar-search navbar-form navbar-right form-inline" action="<?php $this->text( 'wgScript' ) ?>" id="searchform" role="search">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+							    <input class="form-control" type="search" name="search" placeholder="Search" title="Search <?php echo $wgSitename; ?> [ctrl-option-f]" accesskey="f" id="searchInput" autocomplete="off">
+                                <input type="hidden" name="title" value="Special:Search">
+                            </div>
 						</div>
 					</form>
 					</div>
@@ -424,7 +426,8 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 			);
 
 			if( 'page' == $which ) {
-				switch( $link['title'] ) {
+                switch( $link['title'] ) {
+                case 'Main page': $icon = 'home'; break;
 				case 'Page': $icon = 'file'; break;
 				case 'Discussion': $icon = 'comment'; break;
 				case 'Edit': $icon = 'pencil'; break;
@@ -432,18 +435,18 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 				case 'Delete': $icon = 'remove'; break;
 				case 'Move': $icon = 'arrows'; break;
 				case 'Protect': $icon = 'lock'; break;
-				case 'Watch': $icon = 'eye-open'; break;
+				case 'Watch': $icon = 'eye'; break;
 				case 'Unwatch': $icon = 'eye-slash'; break;
 				}//end switch
 
 				$link['title'] = '<i class="fa fa-' . $icon . '"></i> ' . $link['title'];
 			} elseif( 'user' == $which ) {
 				switch( $link['title'] ) {
-				case 'My talk': $icon = 'comment'; break;
-				case 'My preferences': $icon = 'cog'; break;
-				case 'My watchlist': $icon = 'eye-close'; break;
-				case 'My contributions': $icon = 'list-alt'; break;
-				case 'Log out': $icon = 'off'; break;
+				case 'Talk': $icon = 'comment'; break;
+				case 'Preferences': $icon = 'cog'; break;
+                case 'Watchlist': $icon = 'eye'; break;
+				case 'Contributions': $icon = 'list-alt'; break;
+				case 'Log out': $icon = 'sign-out'; break;
 				default: $icon = 'user'; break;
 				}//end switch
 

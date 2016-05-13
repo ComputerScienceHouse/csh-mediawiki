@@ -1,0 +1,3 @@
+[submodule "csh-bootstrap"]
+	path = bootstrap-csh
+	url = https://github.com/ComputerScienceHouse/bootstrap-csh.git
