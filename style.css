@@ -2,6 +2,7 @@ body {
 	background: #fafafa;
 	color: #222;
 	padding-top: 128px;
+	font-family: "Roboto", sans-serif;
 }
 
 body.page-Main_Page .page-header,
@@ -45,6 +46,7 @@ p {
     top: -2px;
     display: inline;
     margin-right: 2px;
+    -webkit-filter: invert(100%);
 }
 
 .user-icon > img {
@@ -397,8 +399,8 @@ img.thumbborder {
 	text-decoration: none;
 	color: #333;
   margin: 0;
-  padding-top:    16px;
-  padding-bottom: 16px;
+  padding-top:    20px;
+  padding-bottom: 10px;
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
   -webkit-border-radius: 0;
@@ -517,7 +519,7 @@ pre.linenums ol {
 
 	.subnav .container {
 		padding-bottom: 1rem;
-		padding-top: 1rem;
+		padding-top: 2rem;
 	}
 }
 
@@ -781,4 +783,16 @@ table.list th {
 
 .list tbody > tr:nth-child(odd) > td {
   background-color: #f9f9f9;
+}
+
+.input-group-addon {
+  background-color: #f5f5f5;
+}
+
+.navbar-nav > .dropdown {
+  padding-top: 5px;
+}
+
+.subnav .nav > li {
+  padding-top: 5px;
 }

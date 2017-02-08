@@ -101,12 +101,12 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-                        <a class="navbar-brand" href="<?php echo $this->data['nav_urls']['mainpage']['href'] ?>" title="<?php echo $wgSitename ?>"><?php echo isset( $wgLogo ) && $wgLogo ? "<img src='{$wgLogo}' alt='Logo' class='logo' /> " : ''; ?><span><?php echo $wgSitenameshort ?: $wgSitename; ?></span></a>
+                        <a class="navbar-brand" href="<?php echo $this->data['nav_urls']['mainpage']['href'] ?>" title="<?php echo $wgSitename ?>"><?php echo isset( $wgLogo ) && $wgLogo ? " " : ''; ?><span><?php echo $wgSitenameshort ?: $wgSitename; ?></span></a>
 					</div>
 
 					<div class="collapse navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li>
+							<li class="dropdown">
 							<a href="<?php echo $this->data['nav_urls']['mainpage']['href'] ?>"><i class="fa fa-home"></i> Home</a>
 							</li>
 							<li class="dropdown">
@@ -211,7 +211,8 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 				<?php endif; ?>
 
 				<div class="pagetitle page-header">
-					<h1><?php $this->html( 'title' ) ?> <small><?php $this->html('subtitle') ?></small></h1>
+					<h1><?php $this->html( 'title' ) ?></h1>
+					<h5><?php $this->html('subtitle') ?></h5>
 				</div>	
 
 				<div class="body">
@@ -245,7 +246,7 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 			<div class="container">
 				<?php $this->includePage('Bootstrap:Footer'); ?>
 				<footer>
-					<p>&copy; <?php echo date('Y'); ?> by <a href="<?php echo (isset($wgCopyrightLink) ? $wgCopyrightLink : 'http://borkweb.com'); ?>"><?php echo (isset($wgCopyright) ? $wgCopyright : 'BorkWeb'); ?></a> 
+					<p>&copy; <?php echo date('Y'); ?> <a href="<?php echo (isset($wgCopyrightLink) ? $wgCopyrightLink : 'https://csh.rit.edu'); ?>"><?php echo (isset($wgCopyright) ? $wgCopyright : 'Computer Science House'); ?></a> 
 						&bull; Powered by <a href="http://mediawiki.org">MediaWiki</a> 
 					</p>
 				</footer>
